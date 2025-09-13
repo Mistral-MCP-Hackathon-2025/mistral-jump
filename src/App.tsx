@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GameCanvas } from "./components/GameCanvas";
 import { GameUI } from "./components/GameUI";
+import { LoadingScreen } from "./components/LoadingScreen";
 import { useGameEngine } from "./hooks/useGameEngine";
 import { useImageLoader } from "./hooks/useImageLoader";
 import type { GameState } from "./types/game";
@@ -10,9 +11,10 @@ function App() {
     score: 0,
     gameOver: false,
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   // Load player image
-  const { playerImage } = useImageLoader();
+  const { playerImage, imageLoaded } = useImageLoader();
 
   // Game engine hooks
   const { gameLoop, startGame, setupInputListeners } = useGameEngine({
@@ -23,6 +25,7 @@ function App() {
       setGameState((prev) => ({ ...prev, gameOver: true }));
     },
     playerImage,
+    imageLoaded,
   });
 
   const handleRestart = () => {
@@ -30,11 +33,10 @@ function App() {
     startGame();
   };
 
-  // Setup input listeners and start game
+  // Setup input listeners and start game immediately (but keep hidden during loading)
   useEffect(() => {
     const cleanup = setupInputListeners();
     startGame();
-
     return cleanup;
   }, [setupInputListeners, startGame]);
 
@@ -52,14 +54,31 @@ function App() {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [gameState.gameOver]);
 
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+  };
+
   return (
-    <GameUI
-      score={gameState.score}
-      gameOver={gameState.gameOver}
-      onRestart={handleRestart}
-    >
-      <GameCanvas onGameLoop={gameLoop} gameOver={gameState.gameOver} />
-    </GameUI>
+    <>
+      {/* Game UI - always rendered but hidden during loading */}
+      <div
+        style={{
+          opacity: isLoading ? 0 : 1,
+          transition: "opacity 0.3s ease-in-out",
+        }}
+      >
+        <GameUI
+          score={gameState.score}
+          gameOver={gameState.gameOver}
+          onRestart={handleRestart}
+        >
+          <GameCanvas onGameLoop={gameLoop} gameOver={gameState.gameOver} />
+        </GameUI>
+      </div>
+
+      {/* Loading screen overlay */}
+      {isLoading && <LoadingScreen onLoadingComplete={handleLoadingComplete} />}
+    </>
   );
 }
 

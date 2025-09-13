@@ -10,12 +10,14 @@ interface UseGameEngineProps {
   onScoreUpdate: (score: number) => void;
   onGameOver: () => void;
   playerImage: HTMLImageElement | null;
+  imageLoaded?: boolean;
 }
 
 export const useGameEngine = ({
   onScoreUpdate,
   onGameOver,
   playerImage,
+  imageLoaded = false,
 }: UseGameEngineProps) => {
   // Game refs
   const playerRef = useRef<Player>({
@@ -89,11 +91,11 @@ export const useGameEngine = ({
         player,
         cameraRef.current,
         playerImage,
-        true, // Always true since we're using direct import
+        imageLoaded,
         facingLeftRef.current
       );
     },
-    [onScoreUpdate, onGameOver, playerImage]
+    [onScoreUpdate, onGameOver, playerImage, imageLoaded]
   );
 
   const startGame = useCallback(
