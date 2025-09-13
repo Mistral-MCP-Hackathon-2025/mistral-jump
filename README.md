@@ -9,11 +9,11 @@
 
 </div>
 
-# 🎮 Keyboard Display Game
+# 🎮 Mistral Jump
 
 ## 🚀 About The Project
 
-**Keyboard Display Game** is an interactive platformer game built with React and TypeScript that showcases real-time keyboard input visualization. Control Le Chat (Mistral's adorable mascot) as it jumps through procedurally generated platforms while your keyboard inputs are beautifully displayed on screen.
+**Mistral Jump** is an interactive platformer game built with React and TypeScript that showcases real-time keyboard input visualization. Control Le Chat (Mistral's adorable mascot) as it jumps through procedurally generated platforms while your keyboard inputs are beautifully displayed on screen.
 
 ### ✨ Key Features
 
@@ -58,8 +58,8 @@
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/keyboard-display.git
-   cd keyboard-display
+   git clone https://github.com/yourusername/mistral-jump.git
+   cd mistral-jump
    ```
 
 2. **Install dependencies**
