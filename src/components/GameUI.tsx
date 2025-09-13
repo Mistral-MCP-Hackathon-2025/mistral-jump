@@ -23,10 +23,28 @@ export const GameUI: React.FC<GameUIProps> = ({
         padding: 0,
         overflow: "hidden",
         fontFamily: "Arial, sans-serif",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        // Full-screen Mistral gradient background
+        background:
+          "linear-gradient(180deg, #FFD800 0%, #FFAF00 25%, #FF8205 50%, #FA500F 75%, #E10500 100%)",
       }}
     >
-      {/* Game Canvas */}
-      {children}
+      {/* Game Container - centered with mobile max width */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "480px", // Mobile-friendly max width
+          height: "100vh",
+          overflow: "hidden",
+          backgroundColor: "transparent", // Let the game render its own background
+        }}
+      >
+        {/* Game Canvas */}
+        {children}
+      </div>
 
       {/* UI Overlay */}
       <div

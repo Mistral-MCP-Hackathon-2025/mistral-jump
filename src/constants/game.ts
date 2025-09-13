@@ -1,6 +1,8 @@
 export const GAME_CONFIG = {
-  // Canvas dimensions - now fullscreen
-  CANVAS_WIDTH: typeof window !== "undefined" ? window.innerWidth : 800,
+  // Canvas dimensions - mobile-friendly max width
+  MAX_GAME_WIDTH: 480, // Mobile-friendly max width
+  CANVAS_WIDTH:
+    typeof window !== "undefined" ? Math.min(window.innerWidth, 480) : 480,
   CANVAS_HEIGHT: typeof window !== "undefined" ? window.innerHeight : 600,
 
   // Physics

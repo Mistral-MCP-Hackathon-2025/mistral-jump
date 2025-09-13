@@ -21,7 +21,7 @@ export const useGameEngine = ({
 }: UseGameEngineProps) => {
   // Game refs
   const playerRef = useRef<Player>({
-    x: GAME_CONFIG.CANVAS_WIDTH / 2 - GAME_CONFIG.PLAYER_WIDTH / 2,
+    x: GAME_CONFIG.MAX_GAME_WIDTH / 2 - GAME_CONFIG.PLAYER_WIDTH / 2,
     y: GAME_CONFIG.CANVAS_HEIGHT - GAME_CONFIG.PLAYER_START_OFFSET,
     velocityX: 0,
     velocityY: 0,
@@ -102,7 +102,9 @@ export const useGameEngine = ({
     (canvasWidth?: number, canvasHeight?: number) => {
       const width =
         canvasWidth ||
-        (typeof window !== "undefined" ? window.innerWidth : 800);
+        (typeof window !== "undefined"
+          ? Math.min(window.innerWidth, GAME_CONFIG.MAX_GAME_WIDTH)
+          : GAME_CONFIG.MAX_GAME_WIDTH);
       const height =
         canvasHeight ||
         (typeof window !== "undefined" ? window.innerHeight : 600);

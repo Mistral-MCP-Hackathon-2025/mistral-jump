@@ -12,7 +12,8 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
   const [canvasSize, setCanvasSize] = useState(() => ({
-    width: typeof window !== "undefined" ? window.innerWidth : 800,
+    width:
+      typeof window !== "undefined" ? Math.min(window.innerWidth, 480) : 480,
     height: typeof window !== "undefined" ? window.innerHeight : 600,
   }));
   const [gameImageSrc, setGameImageSrc] = useState<string>("");
@@ -21,7 +22,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
   useEffect(() => {
     const handleResize = () => {
       setCanvasSize({
-        width: window.innerWidth,
+        width: Math.min(window.innerWidth, 480), // Mobile max width
         height: window.innerHeight,
       });
     };
@@ -91,12 +92,12 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           alt="Game Render"
           style={{
             display: "block",
-            width: "100vw",
-            height: "100vh",
+            width: "100%",
+            height: "100%",
             position: "absolute",
             top: 0,
             left: 0,
-            objectFit: "contain",
+            objectFit: "cover", // Fill the container
             imageRendering: "pixelated",
           }}
         />
