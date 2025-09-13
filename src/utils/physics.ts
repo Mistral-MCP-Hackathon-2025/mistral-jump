@@ -67,6 +67,20 @@ export class PhysicsEngine {
     cameraY: number,
     canvasHeight: number
   ): boolean {
-    return player.y > cameraY + canvasHeight + GAME_CONFIG.GAME_OVER_OFFSET;
+    // Check if player has fallen too far below the visible screen
+    const gameOverThreshold =
+      cameraY + canvasHeight + GAME_CONFIG.GAME_OVER_OFFSET;
+    const isGameOver = player.y > gameOverThreshold;
+
+    // Debug logging (remove in production)
+    if (player.y > cameraY + canvasHeight) {
+      console.log(
+        `Player falling: y=${Math.round(player.y)}, threshold=${Math.round(
+          gameOverThreshold
+        )}, gameOver=${isGameOver}`
+      );
+    }
+
+    return isGameOver;
   }
 }

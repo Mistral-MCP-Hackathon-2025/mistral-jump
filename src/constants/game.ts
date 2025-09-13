@@ -24,7 +24,7 @@ export const GAME_CONFIG = {
 
   // Game mechanics
   COLLISION_TOLERANCE: 3,
-  GAME_OVER_OFFSET: 100,
+  GAME_OVER_OFFSET: 50, // Reduced offset for faster game over detection
   SCORE_MULTIPLIER: 10,
 
   // Visual - Mistral Colors (Official Brand Colors)

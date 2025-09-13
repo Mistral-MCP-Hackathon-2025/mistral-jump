@@ -153,26 +153,26 @@ export const GameUI: React.FC<GameUIProps> = ({
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             pointerEvents: "auto",
             zIndex: 20,
-            backdropFilter: "blur(5px)",
+            backdropFilter: "blur(10px)",
           }}
         >
           <div
             style={{
               textAlign: "center",
-              padding: "40px",
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              backdropFilter: "blur(15px)",
-              border: "2px solid rgba(255, 255, 255, 0.3)",
-              borderRadius: "20px",
-              boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
-              maxWidth: "400px",
-              width: "90%",
+              padding: "30px",
+              backgroundColor: "rgba(255, 255, 255, 0.15)",
+              backdropFilter: "blur(20px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              borderRadius: "15px",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+              maxWidth: "350px",
+              width: "min(350px, calc(100vw - 40px))",
             }}
           >
             {/* Game Over Title */}
@@ -197,15 +197,16 @@ export const GameUI: React.FC<GameUIProps> = ({
             {/* Final Score */}
             <div
               style={{
-                margin: "0 0 30px 0",
-                padding: "15px 20px",
+                margin: "0 0 25px 0",
+                padding: "12px 20px",
                 backgroundColor: "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
                 borderRadius: "10px",
-                fontSize: "18px",
+                fontSize: "16px",
                 color: "#fff",
                 fontFamily: "'Press Start 2P', 'Courier New', monospace",
-                textShadow: "2px 2px 0px rgba(0,0,0,0.8)",
+                textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
                 letterSpacing: "1px",
                 imageRendering: "pixelated",
                 textRendering: "geometricPrecision",
@@ -218,43 +219,42 @@ export const GameUI: React.FC<GameUIProps> = ({
             <button
               onClick={onRestart}
               style={{
-                padding: "15px 30px",
-                fontSize: "16px",
+                padding: "12px 24px",
+                fontSize: "14px",
                 fontFamily: "'Press Start 2P', 'Courier New', monospace",
-                backgroundColor: "#4CAF50",
+                backgroundColor: "rgba(76, 175, 80, 0.8)",
+                backdropFilter: "blur(10px)",
                 color: "white",
-                border: "3px solid #45a049",
-                borderRadius: "10px",
+                border: "1px solid rgba(255, 255, 255, 0.3)",
+                borderRadius: "8px",
                 cursor: "pointer",
-                boxShadow: "0 6px 0px #2e7d32, 0 10px 15px rgba(0,0,0,0.3)",
-                transition: "all 0.1s ease",
+                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.2)",
+                transition: "all 0.2s ease",
                 textTransform: "uppercase",
                 letterSpacing: "1px",
                 imageRendering: "pixelated",
                 textRendering: "geometricPrecision",
-                textShadow: "1px 1px 0px rgba(0,0,0,0.5)",
+                textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.backgroundColor = "#45a049";
-                e.currentTarget.style.transform = "translateY(2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 0px #2e7d32, 0 8px 12px rgba(0,0,0,0.3)";
+                e.currentTarget.style.backgroundColor =
+                  "rgba(69, 160, 73, 0.9)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.3)";
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.backgroundColor = "#4CAF50";
+                e.currentTarget.style.backgroundColor =
+                  "rgba(76, 175, 80, 0.8)";
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow =
-                  "0 6px 0px #2e7d32, 0 10px 15px rgba(0,0,0,0.3)";
+                e.currentTarget.style.boxShadow = "0 4px 15px rgba(0,0,0,0.2)";
               }}
               onMouseDown={(e) => {
-                e.currentTarget.style.transform = "translateY(4px)";
-                e.currentTarget.style.boxShadow =
-                  "0 2px 0px #2e7d32, 0 4px 8px rgba(0,0,0,0.3)";
+                e.currentTarget.style.transform = "translateY(0px)";
+                e.currentTarget.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
               }}
               onMouseUp={(e) => {
-                e.currentTarget.style.transform = "translateY(2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 0px #2e7d32, 0 8px 12px rgba(0,0,0,0.3)";
+                e.currentTarget.style.transform = "translateY(-2px)";
+                e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.3)";
               }}
             >
               Play Again
@@ -264,11 +264,11 @@ export const GameUI: React.FC<GameUIProps> = ({
             <div
               style={{
                 marginTop: "20px",
-                fontSize: "12px",
-                color: "rgba(255, 255, 255, 0.6)",
+                fontSize: "10px",
+                color: "rgba(255, 255, 255, 0.7)",
                 fontFamily: "'Press Start 2P', 'Courier New', monospace",
                 letterSpacing: "1px",
-                textShadow: "1px 1px 0px rgba(0,0,0,0.8)",
+                textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
               }}
             >
               Press ENTER or SPACE to continue...
