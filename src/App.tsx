@@ -4,6 +4,7 @@ import { GameUI } from "./components/GameUI";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { useGameEngine } from "./hooks/useGameEngine";
 import { useImageLoader } from "./hooks/useImageLoader";
+import { useIframeMessaging } from "./hooks/useIframeMessaging";
 import type { GameState } from "./types/game";
 
 function App() {
@@ -16,13 +17,27 @@ function App() {
   // Load player image
   const { playerImage, imageLoaded } = useImageLoader();
 
+  // Iframe messaging hook
+  const {
+    notifyGameStart,
+    notifyGameOver,
+    notifyScoreUpdate,
+    notifyGameRestart,
+  } = useIframeMessaging({
+    onGameEvent: (event, data) => {
+      console.log("Received iframe event:", event, data);
+    },
+  });
+
   // Game engine hooks
   const { gameLoop, startGame, setupInputListeners } = useGameEngine({
     onScoreUpdate: (score: number) => {
       setGameState((prev) => ({ ...prev, score }));
+      notifyScoreUpdate(score);
     },
     onGameOver: () => {
       setGameState((prev) => ({ ...prev, gameOver: true }));
+      notifyGameOver(gameState.score);
     },
     playerImage,
     imageLoaded,
@@ -31,14 +46,16 @@ function App() {
   const handleRestart = () => {
     setGameState({ score: 0, gameOver: false });
     startGame();
+    notifyGameRestart();
   };
 
   // Setup input listeners and start game immediately (but keep hidden during loading)
   useEffect(() => {
     const cleanup = setupInputListeners();
     startGame();
+    notifyGameStart();
     return cleanup;
-  }, [setupInputListeners, startGame]);
+  }, [setupInputListeners, startGame, notifyGameStart]);
 
   // Handle keyboard restart when game is over
   useEffect(() => {
