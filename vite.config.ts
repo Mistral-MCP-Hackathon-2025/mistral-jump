@@ -5,10 +5,26 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    allowedHosts: ["5bfd7ddf4949.ngrok-free.app"],
+    host: "0.0.0.0", // Allow external access
+    port: 5173,
+    allowedHosts: ["5bfd7ddf4949.ngrok-free.app", "52.58.159.118", "*"],
     headers: {
-      "X-Frame-Options": "ALLOWALL",
+      "X-Frame-Options": "SAMEORIGIN", // Changed from ALLOWALL which is invalid
       "Content-Security-Policy": "frame-ancestors *;",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  },
+  preview: {
+    host: "0.0.0.0", // Allow external access
+    port: 4173,
+    headers: {
+      "X-Frame-Options": "SAMEORIGIN",
+      "Content-Security-Policy": "frame-ancestors *;",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   },
   build: {
